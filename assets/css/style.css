@@ -1,0 +1,661 @@
+/* ================================================================
+   PORTFOLIO - CSS REWRITE (2026 Best Practices)
+   ================================================================ */
+
+:root {
+  /* Color Palette (Dark Mode Default) */
+  --bg-color: #050a12;
+  --text-primary: #f0f4f8;
+  --text-secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.4);
+  
+  /* Glassmorphism Tokens (Apple Liquid Glass) */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.01);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  --glass-blur: blur(32px) saturate(200%);
+  
+  /* Indicator Glass (Clear Magnifying Glass Style) */
+  --ind-bg: rgba(255, 255, 255, 0.15);
+  --ind-border: rgba(255, 255, 255, 0.2);
+  --ind-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 0 12px rgba(255, 255, 255, 0.05);
+  --ind-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Layout & Animation */
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --transition-spring: cubic-bezier(0.25, 1.2, 0.5, 1);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root.light-mode {
+  --bg-color: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.3);
+  
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================================================
+   RESET & BASE
+   ================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Outfit', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  /* Prevent scroll chaining and overscroll bounce which can look buggy */
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  overflow-x: hidden;
+  transition: background-color 0.4s var(--transition-smooth), color 0.4s var(--transition-smooth);
+}
+
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; font: inherit; cursor: pointer; }
+
+/* ================================================================
+   BACKGROUND EFFECTS (Optimized for GPU)
+   ================================================================ */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+  /* Use transform for animation, NEVER top/left for performance */
+}
+
+.aurora-1 {
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+  top: -20%; left: -10%;
+  animation: float 20s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+  bottom: -10%; right: -10%;
+  animation: float 25s ease-in-out infinite alternate-reverse;
+}
+
+.aurora-3 {
+  width: 40vw; height: 40vw;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+  top: 30%; left: 40%;
+  animation: float 18s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5%, 8%) scale(1.1); }
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  opacity: 0.06;
+}
+
+/* ================================================================
+   LAYOUT
+   ================================================================ */
+#app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 40px;
+  margin-bottom: 120px; /* Space for floating nav */
+}
+
+@media (max-width: 900px) {
+  #app {
+    grid-template-columns: 1fr;
+    margin-top: 10px;
+  }
+}
+
+/* ================================================================
+   GLASS PANELS (Apple Liquid Glass)
+   ================================================================ */
+.glass-panel {
+  background: var(--glass-bg);
+  /* Use the SVG displacement map for true refraction in Chrome. Fallback to standard blur */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: url(#liquid-glass-panel) blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: calc(100vh - 80px);
+  position: sticky;
+  top: 40px;
+  padding: 40px 24px;
+}
+
+.avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Circle looks perfectly even */
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 16px;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 4px;
+  background: rgba(255,255,255,0.05);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s var(--transition-smooth);
+}
+
+.social-link:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  color: rgba(255,255,255,0.8);
+  font-size: 3.5rem;
+}
+
+.theme-toggle-btn ion-icon {
+  transition: transform 0.4s var(--transition-spring), opacity 0.3s ease;
+}
+
+:root.light-mode .theme-toggle-btn {
+  color: rgba(0,0,0,0.8);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,1);
+}
+
+:root.light-mode .theme-toggle-btn:hover {
+  background: rgba(0,0,0,0.05);
+  color: rgba(0,0,0,1);
+}
+
+/* ================================================================
+   MAIN CONTENT & SPA VIEWS
+   ================================================================ */
+.content {
+  position: relative;
+  min-height: 60vh;
+  /* Overflow hidden prevents scrolling within the panel itself 
+     if we want page-level scroll. We will let the page scroll normally. */
+}
+
+.views-container {
+  position: relative;
+  width: 100%;
+}
+
+.view {
+  /* Using absolute positioning and opacity for SPA transitions */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--transition-smooth), transform 0.4s var(--transition-smooth), visibility 0.4s;
+}
+
+.view.active-view {
+  position: relative;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  /* Optional: view-transition-name if using View Transitions API */
+  view-transition-name: active-view;
+}
+
+.view-header {
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 16px;
+}
+
+.view-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ================================================================
+   VIEW: OVERVIEW
+   ================================================================ */
+.hero-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root.light-mode .hero-headline {
+  background: linear-gradient(135deg, #0f172a, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtext {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ================================================================
+   VIEW: EXPERIENCE
+   ================================================================ */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 6px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent) 0%, rgba(255,255,255,0.05) 100%);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 32px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.uni-logo {
+  position: absolute;
+  left: -17px;
+  top: -6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.timeline-item h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-item h4 ion-icon {
+  color: #38bdf8;
+  font-size: 1.4rem;
+}
+
+.timeline-item h5 {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.timeline-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-left: 48px;
+}
+
+.custom-bullet {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  margin-left: 48px;
+}
+.custom-bullet ion-icon {
+  color: #38bdf8;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ================================================================
+   VIEW: PROJECTS
+   ================================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s var(--transition-spring), border-color 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.project-image {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.project-info {
+  padding: 20px;
+}
+
+.project-info h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-info h4 ion-icon {
+  color: #38bdf8;
+  font-size: 1.5rem;
+}
+.project-info p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+
+
+/* ================================================================
+   FLOATING NAVIGATION BAR (Apple Liquid Glass)
+   ================================================================ */
+.floating-nav {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  
+  /* Container glass styling */
+  background: rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  padding: 6px;
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+:root.light-mode .floating-nav {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center; /* Center align items vertically */
+  position: relative;
+}
+
+.nav-btn {
+  position: relative;
+  z-index: 2;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+:root.light-mode .nav-btn {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Action buttons (Play Timeline, View Resume) always stay white — they have colored backgrounds */
+:root.light-mode .nav-btn.action-btn,
+:root.light-mode a.action-btn {
+  color: #fff !important;
+}
+
+.nav-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-btn.active {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+}
+
+:root.light-mode .nav-btn.active {
+  color: #000;
+  text-shadow: none;
+}
+
+/* The physical glass pill that moves */
+.nav-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0; /* Set by JS */
+  z-index: 1;
+  border-radius: var(--radius-pill);
+  
+  /* Magnifying lens effect */
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(6px) saturate(150%) brightness(1.1);
+  -webkit-backdrop-filter: url(#liquid-glass-pill) blur(6px) saturate(150%) brightness(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 8px 20px rgba(0, 0, 0, 0.4);
+  
+  will-change: transform, width;
+  transition: transform 0.4s var(--transition-spring), width 0.4s var(--transition-spring);
+}
+
+:root.light-mode .nav-indicator {
+  background: rgba(15, 23, 42, 0.12); /* Dark tint for contrast against white text */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.15), inset 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================================================
+   REVEAL ANIMATIONS (Smooth Scrolling)
+   ================================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================================
+   GAME MODE OVERRIDES
+   ================================================================ */
+.content.game-mode {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  height: calc(100vh - 100px) !important;
+}
+
+.content.game-mode .views-container {
+  height: 100%;
+}
+
+.content.game-mode #view-game.active-view {
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#game-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  border-radius: 0;
+  background: #0f172a;
+  outline: none;
+}

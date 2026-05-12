@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navdeep Singh | AI Engineer Portfolio</title>
+  <meta name="description" content="AI Engineer & Researcher Portfolio">
+  <meta name="color-scheme" content="dark light">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- SVG Liquid Glass Refraction Filters (Chrome Only) -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <filter id="liquid-glass-panel" color-interpolation-filters="sRGB">
+      <feImage id="map-panel" href="" result="displacement_map" x="0" y="0" width="100%" height="100%"
+        preserveAspectRatio="none" />
+      <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="25" xChannelSelector="R"
+        yChannelSelector="G" />
+    </filter>
+    <filter id="liquid-glass-pill" color-interpolation-filters="sRGB">
+      <feImage id="map-pill" href="" result="displacement_map" x="0" y="0" width="100%" height="100%"
+        preserveAspectRatio="none" />
+      <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="50" xChannelSelector="R"
+        yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <!-- Dynamic Aurora Background (Optimized) -->
+  <div class="aurora-bg" aria-hidden="true">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+  </div>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Main Application Wrapper -->
+  <div id="app">
+
+    <!-- Sidebar / Profile -->
+    <aside class="sidebar glass-panel">
+      <div class="profile-header">
+        <div class="avatar">
+          <img src="./assets/images/avatar.png" alt="Profile"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\'><rect width=\'80\' height=\'80\' fill=\'%2352c5ff\' rx=\'22\'/></svg>'">
+        </div>
+        <h1 class="name">Navdeep Singh</h1>
+        <h2 class="title" style="margin-bottom: 8px; line-height: 1.4;">AI Researcher at AMD and Masters Student at UofT
+        </h2>
+        <div
+          style="display: flex; align-items: center; justify-content: center; gap: 4px; color: var(--text-secondary); font-size: 0.85rem;">
+          <ion-icon name="location"></ion-icon> Toronto, Canada
+        </div>
+      </div>
+
+      <div class="sidebar-links">
+        <a href="mailto:navdeep@cs.toronto.edu" class="social-link" target="_blank" rel="noopener noreferrer">
+          <ion-icon name="mail"></ion-icon> Email
+        </a>
+        <a href="https://www.linkedin.com/in/navdeep-singh-dhillon/" class="social-link" target="_blank"
+          rel="noopener noreferrer">
+          <ion-icon name="logo-linkedin"></ion-icon> LinkedIn
+        </a>
+        <a href="https://github.com/navdeepsingh1609" class="social-link" target="_blank" rel="noopener noreferrer">
+          <ion-icon name="logo-github"></ion-icon> GitHub
+        </a>
+        <a href="https://leetcode.com/navdeep1609/" class="social-link" target="_blank" rel="noopener noreferrer">
+          <ion-icon name="code-working-outline"></ion-icon> LeetCode
+        </a>
+      </div>
+
+      <div class="sidebar-actions"
+        style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px; padding: 0 16px;">
+        <button class="nav-btn action-btn primary-btn" data-target="view-game"
+          style="display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; padding: 12px 20px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); transition: transform 0.2s; font-family: inherit; font-size: 1rem;">
+          <ion-icon name="game-controller"></ion-icon> Play Timeline
+        </button>
+        <a href="./assets/Resume_Navdeep.pdf" target="_blank" class="action-btn primary-btn"
+          style="display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--accent-gradient); color: #fff; padding: 12px 20px; border-radius: 12px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: transform 0.2s;">
+          <ion-icon name="document-text"></ion-icon> View Resume
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content glass-panel" id="main-content">
+
+      <!-- Views Container (SPA) -->
+      <div class="views-container">
+
+        <!-- View: Overview -->
+        <section class="view active-view" id="view-overview">
+          <div class="view-header">
+            <h3>Overview</h3>
+          </div>
+          <div class="hero-section reveal">
+            <p class="hero-subtext">AI Engineer with expertise in deep learning, edge AI, and deploying scalable
+              software systems. Experienced in transforming frontier research into high-performance, real-world
+              solutions.</p>
+          </div>
+
+          <div class="glass-panel reveal" style="margin-top: 2rem;">
+            <h3>Skills</h3>
+            <div class="stats-grid" style="margin-top: 1rem; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+              <div class="stat-card"
+                style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 16px; text-align: left; gap: 16px;">
+                <ion-icon name="hardware-chip" style="font-size: 2rem; color: #38bdf8; flex-shrink: 0;"></ion-icon>
+                <div style="display: flex; flex-direction: column;">
+                  <span class="stat-label" style="font-weight: 600; font-size: 1rem;">Machine Learning & AI</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">PyTorch, TensorFlow,
+                    Multimodal LLMs, Computer Vision, NLP, RAG, Hugging Face, LangChain</span>
+                </div>
+              </div>
+              <div class="stat-card"
+                style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 16px; text-align: left; gap: 16px;">
+                <ion-icon name="flash" style="font-size: 2rem; color: #f59e0b; flex-shrink: 0;"></ion-icon>
+                <div style="display: flex; flex-direction: column;">
+                  <span class="stat-label" style="font-weight: 600; font-size: 1rem;">Systems & Optimization</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">CUDA, Triton, GPU
+                    Kernel Optimization, TensorRT, vLLM, KV-Cache Management, C/C++</span>
+                </div>
+              </div>
+              <div class="stat-card"
+                style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 16px; text-align: left; gap: 16px;">
+                <ion-icon name="cloud-upload" style="font-size: 2rem; color: #a855f7; flex-shrink: 0;"></ion-icon>
+                <div style="display: flex; flex-direction: column;">
+                  <span class="stat-label" style="font-weight: 600; font-size: 1rem;">Deployment & MLOps</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Docker, Kubernetes,
+                    MLflow, Ray, Edge AI, Git</span>
+                </div>
+              </div>
+              <div class="stat-card"
+                style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 16px; text-align: left; gap: 16px;">
+                <ion-icon name="code-slash" style="font-size: 2rem; color: #10b981; flex-shrink: 0;"></ion-icon>
+                <div style="display: flex; flex-direction: column;">
+                  <span class="stat-label" style="font-weight: 600; font-size: 1rem;">Programming & Tools</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">Python, JavaScript
+                    (React, Node.js), SQL, PostgreSQL, MongoDB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-panel reveal" style="margin-top: 2rem;">
+            <h3>Education</h3>
+            <div class="timeline" style="margin-top: 1rem;">
+              <div class="timeline-item" style="position: relative;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Utoronto_coa.svg" alt="UofT Logo"
+                  class="uni-logo">
+                <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-left: 48px;">Master of Science in
+                  Applied Computing (AI)</h4>
+                <h5 style="margin-left: 48px;">University of Toronto, Canada · Sept 2025 - Dec 2026</h5>
+                <p style="margin-left: 48px;">GPA: 4.0/4.0<br>Courses: Computational Imaging, Neural Networks and Deep
+                  Learning, Visual and Mobile Computing Systems.<br>Teaching Assistant: Introduction to Computer
+                  Programming and Data Structures.</p>
+              </div>
+              <div class="timeline-item" style="position: relative;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Thapar_Logo.png" alt="Thapar Logo"
+                  class="uni-logo">
+                <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-left: 48px;">Bachelor of Engineering in
+                  Computer Science</h4>
+                <h5 style="margin-left: 48px;">Thapar Institute of Engineering, India · July 2019 - June 2023</h5>
+                <p style="margin-left: 48px;">CGPA: 9.34/10<br>Minor: Edge AI and Robotics (by NVIDIA)</p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="glass-panel reveal" style="margin-top: 2rem;">
+            <h3>Recommendations & Testimonials</h3>
+            <div class="testimonial-slider"
+              style="margin-top: 1rem; position: relative; padding: 24px; background: rgba(0,0,0,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+              <div class="testimonial-content" style="text-align: center;">
+                <ion-icon name="chatbubbles"
+                  style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 12px;"></ion-icon>
+                <p style="font-size: 1rem; font-style: italic; color: var(--text-primary); line-height: 1.6;">"Navdeep
+                  joined our team as an intern and later became a valuable MME Header Engineer in the Technical
+                  Documentation team. His expertise in creating C/C++ based headers and SVD files greatly contributed to
+                  our projects. I highly recommend Navdeep for his dedication and impactful contributions."</p>
+                <div style="margin-top: 16px;">
+                  <h4 style="font-size: 1rem; font-weight: 600;">Pooja Dhiman Abbi</h4>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Senior Manager @ NXP
+                    Semiconductors</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-slider"
+              style="margin-top: 1rem; position: relative; padding: 24px; background: rgba(0,0,0,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+              <div class="testimonial-content" style="text-align: center;">
+                <ion-icon name="chatbubbles"
+                  style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 12px;"></ion-icon>
+                <p style="font-size: 0.95rem; font-style: italic; color: var(--text-primary); line-height: 1.6;">"I had
+                  the pleasure of collaborating with Navdeep Singh during our time at Thapar University, where we joined
+                  forces in 2019 and undertook various projects together. Navdeep’s consistent dedication, disciplined
+                  approach, and remarkable talent truly set him apart. Having worked side by side on multiple projects,
+                  I've witnessed firsthand his exceptional leadership skills, unwavering patience, and the ability to
+                  inspire those around him. Navdeep is not just a valuable team member; he is a joy to work with,
+                  consistently contributing to the success of the team. His commitment to excellence makes him stand out
+                  as a great engineer. I highly recommend Navdeep for any collaborative effort, as he brings a unique
+                  blend of talent, discipline, and leadership to the table."</p>
+                <div style="margin-top: 16px;">
+                  <h4 style="font-size: 1rem; font-weight: 600;">Siya Dutta</h4>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Software Engineer @ Ericsson</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View: Experience -->
+        <section class="view" id="view-experience">
+          <div class="view-header">
+            <h3>Experience</h3>
+          </div>
+
+          <!-- Experience Logo Grid -->
+          <div class="glass-panel reveal" style="margin-bottom: 2rem; padding: 16px 24px;">
+            <h4
+              style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">
+              Trusted By Teams At</h4>
+            <div style="display: flex; gap: 32px; align-items: center; opacity: 0.9;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg" alt="AMD"
+                style="height: 24px;">
+              <img src="./assets/images/NXPI.svg" alt="NXP" style="height: 28px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Utoronto_coa.svg" alt="UofT"
+                  style="height: 36px; filter: drop-shadow(0 0 2px rgba(255,255,255,0.8));">
+                <span style="font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1;">UofT
+                  CS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline reveal">
+            <div class="timeline-item" style="position: relative;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg" alt="AMD Logo"
+                class="uni-logo" style="padding: 12px; border-radius: 8px; background: #fff;">
+              <h4 style="margin-left: 48px;">AI Intern</h4>
+              <h5 style="margin-left: 48px;">AMD, Toronto, Canada · [Start Date] - Present</h5>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Exploring generative AI for GPU kernel optimization and portability.</p>
+              </div>
+            </div>
+            <div class="timeline-item" style="position: relative;">
+              <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Utoronto_coa.svg" alt="UofT Logo"
+                class="uni-logo">
+              <h4 style="margin-left: 48px;">Teaching Assistant</h4>
+              <h5 style="margin-left: 48px;">Department of Computer Science, University of Toronto · Sep 2025 - May 2026
+              </h5>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p><strong>Jan 2026 - May 2026:</strong> CSC263H1: Data Structures and Analysis</p>
+              </div>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p><strong>Sep 2025 - May 2026:</strong> CSC108: Introduction to Computer Programming</p>
+              </div>
+            </div>
+            <div class="timeline-item" style="position: relative;">
+              <img src="./assets/images/NXPI.svg" alt="NXP Logo" class="uni-logo" style="padding: 10px;">
+              <h4 style="margin-left: 48px;">Microprocessor Header Engineer</h4>
+              <h5 style="margin-left: 48px;">NXP Semiconductors, Noida, India · July 2023 - March 2024</h5>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Developed and optimized critical low-level C/C++ based software components, including memory-mapped
+                  register header files and interrupt handling, across 6+ SoC projects.</p>
+              </div>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Automated the revision history generation process, cutting manual effort from 2 days to a few clicks.
+                </p>
+              </div>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Developed Python scripts to optimize interrupt workflows, which reduced coding errors by 30%,
+                  enabling faster deployment.</p>
+              </div>
+            </div>
+            <div class="timeline-item" style="position: relative;">
+              <img src="./assets/images/NXPI.svg" alt="NXP Logo" class="uni-logo" style="padding: 10px;">
+              <h4 style="margin-left: 48px;">Technical Intern - Microprocessor Eng.</h4>
+              <h5 style="margin-left: 48px;">NXP Semiconductors, Noida, India · Jan 2023 - July 2023</h5>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Contributed to header workflows for 4 SoC projects, ensuring reliability and delivery to Validation,
+                  RTD, and Design teams.</p>
+              </div>
+              <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                <p>Resolved 20+ tickets on customer-ready header files, improving early-stage support for chip
+                  development cycles.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View: Projects -->
+        <section class="view" id="view-projects">
+          <div class="view-header">
+            <h3>Projects</h3>
+          </div>
+          <div class="projects-grid reveal" style="grid-template-columns: 1fr; gap: 24px;">
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 200px; border-radius: 12px 12px 0 0; background: linear-gradient(135deg, #f59e0b, #ef4444); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                <ion-icon name="videocam-outline" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></ion-icon>
+                <div
+                  style="position: absolute; bottom: 12px; left: 16px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #fff;">
+                  PyTorch · Multimodal LLMs</div>
+              </div>
+              <div class="project-info" style="padding: 20px;">
+                <h4><ion-icon name="flash"></ion-icon> Multimodal DuoAttention (MMDA)</h4>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Developed Multimodal DuoAttention (MMDA), a head-specialized KV-cache management method for
+                    long-video multimodal LLMs, and evaluated it on offline and streaming VideoQA benchmarks.</p>
+                </div>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Achieved up to 9.8× KV-cache memory reduction on LLaVA-OV-0.5B and 2.2× on 7B at 32K context, while
+                    improving prefill latency by 8–14% and preserving most benchmark accuracy.</p>
+                </div>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>On real streaming benchmarks (RVS-Ego, RVS-Movie), MMDA improved over full attention while cutting
+                    GPU memory from 15.0→4.8 GB and 9.2→3.5 GB, and reducing answer latency from 1.77→0.33 s and
+                    1.34→0.33 s.</p>
+                </div>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Benchmarked against ReKV and StreamingTom, showing MMDA offers the strongest overall
+                    quality-efficiency tradeoff and remains runnable in settings where 7B full attention runs out of
+                    memory.</p>
+                </div>
+              </div>
+            </div>
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 200px; border-radius: 12px 12px 0 0; background: linear-gradient(135deg, #1e3a8a, #3b82f6); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                <ion-icon name="image-outline" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></ion-icon>
+                <div
+                  style="position: absolute; bottom: 12px; left: 16px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #fff;">
+                  PyTorch · Computer Vision</div>
+              </div>
+              <div class="project-info" style="padding: 20px;">
+                <h4><ion-icon name="rocket"></ion-icon> Frequency-Aware UDC Restoration via Knowledge Distillation</h4>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Designed a PyTorch-based distillation framework for UDC image restoration, transferring spectral
+                    reasoning from a MambaIR teacher to a lightweight UNet using FFT based losses.</p>
+                </div>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Achieved teacher-level perceptual quality while reducing inference latency by 40 times (2.5s to
+                    &lt;100ms) for real-time mobile deployment.</p>
+                </div>
+              </div>
+            </div>
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 200px; border-radius: 12px 12px 0 0; background: linear-gradient(135deg, #064e3b, #10b981); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                <ion-icon name="mic-outline" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></ion-icon>
+                <div
+                  style="position: absolute; bottom: 12px; left: 16px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #fff;">
+                  Llama 3 · Audio ML</div>
+              </div>
+              <div class="project-info" style="padding: 20px;">
+                <h4><ion-icon name="medkit"></ion-icon> SurgiSync - Agentic Voice Assistant for Hospitals</h4>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Developed an agentic AI multilingual voice assistant automating hospital workflows using LLMs
+                    (Llama 3 for intent classification, RAG) and advanced audio models (Higgs for STT/TTS with emotion &
+                    multi-speaker for surgery transcript generation).</p>
+                </div>
+              </div>
+            </div>
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 200px; border-radius: 12px 12px 0 0; background: linear-gradient(135deg, #4c1d95, #8b5cf6); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                <ion-icon name="warning-outline" style="font-size: 5rem; color: rgba(255,255,255,0.2);"></ion-icon>
+                <div
+                  style="position: absolute; bottom: 12px; left: 16px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #fff;">
+                  Flutter · IoT · Django</div>
+              </div>
+              <div class="project-info" style="padding: 20px;">
+                <h4><ion-icon name="warning"></ion-icon> QuickAid - IoT and ML Crash Detection System</h4>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Built a cross-platform mobile app (Flutter + Django) integrated with an IoT sensor based hardware
+                    device to detect motorcycle crashes.</p>
+                </div>
+                <div class="custom-bullet"><ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <p>Developed an automated alert system that notifies authorities and emergency contacts, reducing
+                    response time to under 30 seconds.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View: Certifications -->
+        <section class="view" id="view-certifications">
+          <div class="view-header">
+            <h3>Certifications</h3>
+          </div>
+          <div class="projects-grid reveal"
+            style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+            <!-- Placeholder Certification 1 -->
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 160px; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2)); display: flex; align-items: center; justify-content: center;">
+                <ion-icon name="ribbon" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></ion-icon>
+              </div>
+              <div class="project-info">
+                <h4><ion-icon name="school"></ion-icon> DeepLearning.AI Specialization</h4>
+                <p>Advanced Machine Learning Specialization. (Placeholder)</p>
+              </div>
+            </div>
+            <!-- Placeholder Certification 2 -->
+            <div class="project-card" style="display: flex; flex-direction: column; height: auto;">
+              <div class="project-image"
+                style="height: 160px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(56, 189, 248, 0.2)); display: flex; align-items: center; justify-content: center;">
+                <ion-icon name="ribbon" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></ion-icon>
+              </div>
+              <div class="project-info">
+                <h4><ion-icon name="school"></ion-icon> NVIDIA Edge AI</h4>
+                <p>Certified Edge AI Developer. (Placeholder)</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View: Interactive Timeline Game -->
+        <section class="view" id="view-game"
+          style="padding: 0; display: flex; flex-direction: column; height: 100%; position: relative;">
+          <div class="game-overlay" id="game-start-overlay"
+            style="position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 24px;">
+            <ion-icon name="game-controller" style="font-size: 4rem; color: #a855f7; margin-bottom: 16px;"></ion-icon>
+            <h2 style="color: #fff; margin-bottom: 16px; font-size: 2rem;">Interactive Timeline</h2>
+            <p style="color: #cbd5e1; margin-bottom: 24px; text-align: center; max-width: 400px; line-height: 1.6;">Use
+              <strong style="color:#fff">A/D</strong> or <strong style="color:#fff">Left/Right</strong> arrows to
+              move.<br>Space or <strong style="color:#fff">W/Up</strong> to jump.
+            </p>
+            <button id="start-game-btn" class="primary-btn"
+              style="background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; padding: 14px 40px; border-radius: 12px; font-weight: bold; border: none; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); transition: transform 0.2s;">Start
+              Game</button>
+          </div>
+          <canvas id="game-canvas"
+            style="width: 100%; height: 100%; border-radius: 24px; background: #0f172a; display: block; outline: none;"
+            tabindex="0"></canvas>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating Navigation Bar -->
+  <nav class="floating-nav" id="main-nav">
+    <div class="nav-container">
+      <div class="nav-indicator" id="nav-indicator"></div>
+      <button class="nav-btn active" data-target="view-overview">Overview</button>
+      <button class="nav-btn" data-target="view-experience">Experience</button>
+      <button class="nav-btn" data-target="view-projects">Projects</button>
+      <button class="nav-btn" data-target="view-certifications">Certifications</button>
+
+      <!-- Theme Toggle inside Nav -->
+      <button class="nav-btn theme-toggle-btn" id="theme-btn" aria-label="Toggle Theme">
+        <ion-icon name="moon"></ion-icon>
+      </button>
+    </div>
+  </nav>
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/game.js"></script>
+</body>
+
+</html>
