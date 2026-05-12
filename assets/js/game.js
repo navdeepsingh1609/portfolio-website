@@ -341,7 +341,7 @@
     }
   }
 
-  // Input handling
+  // Input handling (Keyboard)
   window.addEventListener('keydown', e => {
     keys[e.code] = true;
     if (gameRunning && ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
@@ -349,6 +349,77 @@
     }
   });
   window.addEventListener('keyup', e => keys[e.code] = false);
+
+  // Input handling (Mobile Touch)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let activeTouches = {};
+
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      const t = e.changedTouches[i];
+      activeTouches[t.identifier] = { x: t.clientX, y: t.clientY };
+      handleTouchState();
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      const t = e.changedTouches[i];
+      const start = activeTouches[t.identifier];
+      if (start) {
+        // Detect swipe up for jump
+        if (start.y - t.clientY > 40) {
+          keys['Space'] = true;
+        }
+        start.x = t.clientX;
+        start.y = t.clientY;
+      }
+    }
+    handleTouchState();
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', e => {
+    e.preventDefault();
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      const t = e.changedTouches[i];
+      delete activeTouches[t.identifier];
+    }
+    handleTouchState();
+  }, { passive: false });
+
+  canvas.addEventListener('touchcancel', e => {
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      const t = e.changedTouches[i];
+      delete activeTouches[t.identifier];
+    }
+    handleTouchState();
+  });
+
+  function handleTouchState() {
+    keys['ArrowLeft'] = false;
+    keys['ArrowRight'] = false;
+    keys['Space'] = false;
+    
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    
+    for (let id in activeTouches) {
+      const t = activeTouches[id];
+      if (t.x < w / 3) {
+        keys['ArrowLeft'] = true;
+      } else if (t.x > (w * 2) / 3) {
+        keys['ArrowRight'] = true;
+      } else if (t.y < h / 2) {
+        keys['Space'] = true; // Tap top middle to jump
+      } else {
+        // Bottom middle could be jump too
+        keys['Space'] = true; 
+      }
+    }
+  }
 
   function resize() {
     const rect = canvas.getBoundingClientRect();

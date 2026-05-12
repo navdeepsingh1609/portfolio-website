@@ -190,8 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
         view.classList.add('active-view');
         if (targetId === 'view-game') {
           document.getElementById('main-content').classList.add('game-mode');
+          document.body.classList.add('game-active');
         } else {
           document.getElementById('main-content').classList.remove('game-mode');
+          document.body.classList.remove('game-active');
         }
       } else {
         view.classList.remove('active-view');
