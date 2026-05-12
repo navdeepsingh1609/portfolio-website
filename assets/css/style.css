@@ -169,20 +169,22 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
     max-width: 100%;
     bottom: 16px;
     padding: 6px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .floating-nav::-webkit-scrollbar {
-    display: none;
   }
 
   .nav-container {
-    width: max-content;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+  }
+
+  .nav-container::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-btn {
+    flex-shrink: 0;
     padding: 8px 14px;
     font-size: 0.85rem;
   }
@@ -701,14 +703,16 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
 /* ================================================================
    GAME MODE OVERRIDES
    ================================================================ */
-body.game-active .sidebar {
-  display: none !important;
-}
+@media (max-width: 900px) {
+  body.game-active .sidebar {
+    display: none !important;
+  }
 
-body.game-active #app {
-  grid-template-columns: 1fr !important;
-  margin-top: 0 !important;
-  margin-bottom: 80px !important;
+  body.game-active #app {
+    grid-template-columns: 1fr !important;
+    margin-top: 0 !important;
+    margin-bottom: 80px !important;
+  }
 }
 
 .content.game-mode {

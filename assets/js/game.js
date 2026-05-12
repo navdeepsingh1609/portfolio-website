@@ -5,6 +5,11 @@
   
   const startBtn = document.getElementById('start-game-btn');
   const overlay = document.getElementById('game-start-overlay');
+  const exitBtn = document.getElementById('exit-game-btn');
+  const mobileControls = document.getElementById('mobile-controls');
+  const btnLeft = document.getElementById('btn-left');
+  const btnRight = document.getElementById('btn-right');
+  const btnJump = document.getElementById('btn-jump');
   
   let gameRunning = false;
   let keys = {};
@@ -435,6 +440,8 @@
   function init() {
     resize();
     overlay.style.display = 'none';
+    if (exitBtn) exitBtn.style.display = 'flex';
+    if (mobileControls && window.innerWidth <= 900) mobileControls.style.display = 'flex';
     gameRunning = true;
     canvas.focus();
     player.x = 100;
@@ -453,6 +460,30 @@
   }
 
   startBtn.addEventListener('click', init);
+
+  if (exitBtn) {
+    exitBtn.addEventListener('click', () => {
+      // Simulate clicking the Overview nav button
+      const overviewBtn = document.querySelector('.nav-btn[data-target="view-overview"]');
+      if (overviewBtn) {
+        overviewBtn.click();
+      }
+    });
+  }
+
+  function setupMobileBtn(btn, key) {
+    if (!btn) return;
+    const press = (e) => { e.preventDefault(); keys[key] = true; };
+    const release = (e) => { e.preventDefault(); keys[key] = false; };
+    btn.addEventListener('touchstart', press, { passive: false });
+    btn.addEventListener('touchend', release, { passive: false });
+    btn.addEventListener('mousedown', press);
+    btn.addEventListener('mouseup', release);
+    btn.addEventListener('mouseleave', release);
+  }
+  setupMobileBtn(btnLeft, 'ArrowLeft');
+  setupMobileBtn(btnRight, 'ArrowRight');
+  setupMobileBtn(btnJump, 'Space');
 
   function update(dt) {
     // Normalizing dt (assume 60fps = 1.0 dt)
@@ -844,6 +875,8 @@
         } else {
           gameRunning = false;
           overlay.style.display = 'flex';
+          if (exitBtn) exitBtn.style.display = 'none';
+          if (mobileControls) mobileControls.style.display = 'none';
           stopLightEaster();
         }
       }
