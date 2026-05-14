@@ -201,7 +201,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. Reset scroll position and re-trigger reveals
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) {
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        // On mobile, scroll to the content area so the sidebar (Game/Resume) 
+        // "scrolls up" out of view, making the section visible.
+        mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     currentViewId = targetId;
     
     // Wait for view transition to finish before triggering reveals

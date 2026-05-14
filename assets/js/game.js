@@ -844,7 +844,9 @@
     let drawX = player.x + (player.width - drawW)/2;
     let drawY = player.y + (player.height - drawH);
 
-    ctx.fillRect(Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH));
+    ctx.beginPath();
+    ctx.roundRect(Math.round(drawX), Math.round(drawY), Math.round(drawW), Math.round(drawH), 8);
+    ctx.fill();
     ctx.shadowBlur = 0;
 
     ctx.restore();

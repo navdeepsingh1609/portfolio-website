@@ -45,6 +45,27 @@
   --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
 }
 
+/* Light Mode Card Overrides */
+:root.light-mode .title,
+:root.light-mode .social-link {
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+:root.light-mode .social-link:hover {
+  background: rgba(0,0,0,0.08);
+}
+:root.light-mode .stat-card,
+:root.light-mode .project-card {
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+:root.light-mode .project-card:hover {
+  border-color: rgba(0,0,0,0.15);
+}
+:root.light-mode .timeline::before {
+  background: linear-gradient(to bottom, var(--accent) 0%, rgba(0,0,0,0.05) 100%);
+}
+
 /* ================================================================
    RESET & BASE
    ================================================================ */
@@ -158,10 +179,33 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
   }
 
   .sidebar {
-    position: relative;
-    top: 0;
-    height: auto;
-    padding: 32px 16px;
+    position: relative !important;
+    top: 0 !important;
+    height: auto !important;
+    padding: 24px 16px;
+    margin-bottom: 8px;
+  }
+
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(30px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  :root.light-mode .glass-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(25px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .content {
+    padding: 24px 16px !important;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr !important;
   }
 
   .floating-nav {
@@ -169,6 +213,9 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
     max-width: 100%;
     bottom: 16px;
     padding: 6px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
   }
 
   .nav-container {
@@ -185,18 +232,33 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
 
   .nav-btn {
     flex-shrink: 0;
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .nav-btn ion-icon {
+    font-size: 1.1rem;
   }
 
   .theme-toggle-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 2rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    padding: 0;
   }
 
   .hero-headline {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+  }
+  
+  .timeline-item p, .custom-bullet {
+    margin-left: 16px !important;
+  }
+  
+  .timeline-item h4 {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -598,9 +660,9 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
   z-index: 9999;
   
   /* Container glass styling */
-  background: rgba(15, 23, 42, 0.2);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-pill);
   padding: 6px;
@@ -610,7 +672,7 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
 }
 
 :root.light-mode .floating-nav {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
 }
