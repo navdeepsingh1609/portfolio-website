@@ -288,4 +288,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Init reveals for the first view
   initRevealsForView(document.getElementById(currentViewId));
 
+  // ── AUTO-HIDE NAV ON SCROLL (Mobile Only) ───────────────────────
+  let lastScrollTop = 0;
+  const mainNav = document.getElementById('main-nav');
+  
+  window.addEventListener('scroll', () => {
+    // Only apply logic on mobile screens
+    if (window.innerWidth > 900) {
+      mainNav.classList.remove('nav-hidden');
+      return;
+    }
+    
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Determine scroll direction
+    // If scrolled down more than 100px and scrolling down
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      mainNav.classList.add('nav-hidden');
+    } else if (scrollTop < lastScrollTop) {
+      // Scrolling up
+      mainNav.classList.remove('nav-hidden');
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  }, { passive: true });
+
+
 });
