@@ -109,12 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function applyTheme(theme) {
     const icon = themeBtn?.querySelector('ion-icon');
+    const label = themeBtn?.querySelector('.theme-label');
     if (theme === 'light-mode') {
       root.classList.add('light-mode');
       if (icon) icon.setAttribute('name', 'sunny');
+      if (label) label.textContent = 'Light Mode';
     } else {
       root.classList.remove('light-mode');
       if (icon) icon.setAttribute('name', 'moon');
+      if (label) label.textContent = 'Dark Mode';
     }
   }
 

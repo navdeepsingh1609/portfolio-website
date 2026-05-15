@@ -841,20 +841,36 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
 
   body.game-active .theme-toggle-btn {
     margin: 0 !important;
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 1.6rem !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+    width: auto !important;
+    height: 52px !important;
+    padding: 0 20px !important;
+    background: rgba(15, 23, 42, 0.8) !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    border-radius: 50% !important;
+    border-radius: 999px !important;
     color: #fff !important;
+    gap: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  body.game-active .theme-toggle-btn ion-icon {
+    font-size: 2.2rem !important;
+    margin: 0 !important;
+  }
+
+  body.game-active .theme-label {
+    display: inline !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
   }
 
   :root.light-mode body.game-active .theme-toggle-btn {
-    background: rgba(0, 0, 0, 0.05) !important;
+    background: rgba(255, 255, 255, 0.9) !important;
     color: #000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
   }
 
   body.game-active .nav-container {
@@ -866,7 +882,26 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
   body.game-active #app {
     grid-template-columns: 1fr !important;
     margin-top: 0 !important;
-    margin-bottom: 60px !important;
+    margin-bottom: 70px !important;
+  }
+
+  /* Game Control Light Mode Fixes */
+  :root.light-mode #btn-left,
+  :root.light-mode #btn-right {
+    background: rgba(0, 0, 0, 0.1) !important;
+    color: #000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(8px);
+  }
+
+  :root.light-mode #btn-jump {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3) !important;
+  }
+
+  :root.light-mode #exit-game-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2) !important;
   }
 }
 
