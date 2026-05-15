@@ -815,11 +815,13 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
    GAME MODE OVERRIDES
    ================================================================ */
 @media (max-width: 900px) {
-  body.game-active .sidebar {
-    display: none !important;
-  }
+  body.game-active .sidebar,
   body.game-active .floating-nav {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(100px) !important;
   }
 
   body.game-active #app {

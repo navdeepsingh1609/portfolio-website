@@ -653,6 +653,13 @@
     ctx.fillStyle = isLight ? '#475569' : '#94a3b8';
     ctx.font = 'bold 12px Outfit, sans-serif';
     ctx.fillText(isLight ? '☀️ Light Mode Active' : '🌙 Dark Mode Active', 30, 58);
+
+    // Warning: don't turn on light mode (pulses to hint at the Easter egg)
+    const warnAlpha = 0.6 + Math.sin(Date.now() / 400) * 0.4;
+    ctx.globalAlpha = warnAlpha;
+    ctx.fillStyle = '#fbbf24';
+    ctx.font = 'bold 13px Outfit, sans-serif';
+    ctx.fillText('⚠️  Warning: Do NOT turn on light mode', 30, 78);
     ctx.globalAlpha = 1.0;
 
     // Draw grid background (parallax)
