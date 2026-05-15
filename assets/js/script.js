@@ -295,8 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   window.addEventListener('scroll', () => {
     // Only apply logic on mobile screens
-    if (window.innerWidth > 900) {
-      mainNav.classList.remove('nav-hidden');
+    if (window.innerWidth > 900 || document.body.classList.contains('game-active')) {
+      if (mainNav) mainNav.classList.remove('nav-hidden');
       return;
     }
     

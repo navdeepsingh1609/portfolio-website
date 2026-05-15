@@ -841,9 +841,26 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
 
   body.game-active .theme-toggle-btn {
     margin: 0 !important;
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 1.5rem !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.6rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+  }
+
+  :root.light-mode body.game-active .theme-toggle-btn {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #000 !important;
+  }
+
+  body.game-active .nav-container {
+    padding: 0 !important;
+    overflow: visible !important;
+    justify-content: center !important;
   }
 
   body.game-active #app {
