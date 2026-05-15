@@ -152,7 +152,8 @@
     {
       x: 3400, y: 200,
       text: "AMD (2026-Present)", subtext: "AI Intern - Generative AI",
-      logoSrc: null, logoId: 'amd'
+      logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg',
+      logoId: 'amd'
     },
     {
       x: 4400, y: 300,
@@ -208,14 +209,21 @@
       }
 
     } else if (id === 'amd') {
-      // White bg, bold red AMD text
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
-      ctx.fillStyle = '#ed1c24';
-      ctx.font = `bold ${r * 0.65}px Outfit, sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('AMD', cx, cy);
+      if (imgReady) {
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const scale = Math.min((r * 1.6) / iw, (r * 1.6) / ih);
+        ctx.drawImage(img, cx - (iw * scale) / 2, cy - (ih * scale) / 2, iw * scale, ih * scale);
+      } else {
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+        ctx.fillStyle = '#ed1c24';
+        ctx.font = `bold ${r * 0.65}px Outfit, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AMD', cx, cy);
+      }
 
     } else if (id === 'uoft' && imgReady) {
       // White bg then contained image
@@ -670,7 +678,9 @@
     // Draw Platforms
     platforms.forEach(p => {
       ctx.fillStyle = p.color;
-      ctx.fillRect(Math.round(p.x), Math.round(p.y), p.width, p.height);
+      ctx.beginPath();
+      ctx.roundRect(Math.round(p.x), Math.round(p.y), p.width, p.height, 8);
+      ctx.fill();
       
       // Neon top edge
       ctx.fillStyle = 'rgba(56, 189, 248, 0.6)';
