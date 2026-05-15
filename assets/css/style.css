@@ -815,19 +815,41 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
    GAME MODE OVERRIDES
    ================================================================ */
 @media (max-width: 900px) {
-  body.game-active .sidebar,
-  body.game-active .floating-nav {
+  body.game-active .sidebar {
     display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(100px) !important;
+  }
+  
+  body.game-active .floating-nav {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) !important;
+    background: rgba(15, 23, 42, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 4px !important;
+    border-radius: 999px !important;
+  }
+
+  body.game-active .nav-btn,
+  body.game-active #nav-indicator {
+    display: none !important;
+  }
+
+  body.game-active .theme-toggle-btn {
+    margin: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.5rem !important;
   }
 
   body.game-active #app {
     grid-template-columns: 1fr !important;
     margin-top: 0 !important;
-    margin-bottom: 80px !important;
+    margin-bottom: 60px !important;
   }
 }
 

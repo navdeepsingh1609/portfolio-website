@@ -104,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── THEME TOGGLE ────────────────────────────────────────────────
   const THEME_KEY = 'pf-theme';
-  const getSavedTheme = () => localStorage.getItem(THEME_KEY) || 'dark-mode';
+  // Force dark-mode by default on every fresh load
+  const getSavedTheme = () => 'dark-mode';
   
   function applyTheme(theme) {
     const icon = themeBtn?.querySelector('ion-icon');
