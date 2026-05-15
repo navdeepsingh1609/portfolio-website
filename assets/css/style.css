@@ -818,6 +818,9 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
   body.game-active .sidebar {
     display: none !important;
   }
+  body.game-active .floating-nav {
+    display: none !important;
+  }
 
   body.game-active #app {
     grid-template-columns: 1fr !important;

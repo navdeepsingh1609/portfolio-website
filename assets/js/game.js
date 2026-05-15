@@ -123,8 +123,8 @@
     height: 32,
     vx: 0,
     vy: 0,
-    color: '#00e5ff',
-    glow: '#00e5ff',
+    color: document.documentElement.classList.contains('light-mode') ? '#0ea5e9' : '#00e5ff',
+    glow: document.documentElement.classList.contains('light-mode') ? '#0ea5e9' : '#00e5ff',
     grounded: false
   };
 
@@ -637,8 +637,10 @@
     const logicalWidth = rect.width;
     const logicalHeight = rect.height;
 
+    const isLight = document.documentElement.classList.contains('light-mode');
+
     // Clear background
-    ctx.fillStyle = '#0f172a';
+    ctx.fillStyle = isLight ? '#f1f5f9' : '#0f172a';
     ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
     // Draw Score
@@ -647,17 +649,15 @@
     ctx.textAlign = 'left';
     ctx.fillText(`🐛 Bugs Squashed: ${score} / ${bugs.length}`, 30, 38);
 
-    // Warning: don't turn on light mode (pulses to hint at the Easter egg)
-    const warnAlpha = 0.6 + Math.sin(Date.now() / 400) * 0.4;
-    ctx.globalAlpha = warnAlpha;
-    ctx.fillStyle = '#fbbf24';
-    ctx.font = 'bold 13px Outfit, sans-serif';
-    ctx.fillText('⚠️  Warning: Do NOT turn on light mode', 30, 60);
+    // Status bar indicator
+    ctx.fillStyle = isLight ? '#475569' : '#94a3b8';
+    ctx.font = 'bold 12px Outfit, sans-serif';
+    ctx.fillText(isLight ? '☀️ Light Mode Active' : '🌙 Dark Mode Active', 30, 58);
     ctx.globalAlpha = 1.0;
 
     // Draw grid background (parallax)
     ctx.save();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+    ctx.strokeStyle = isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.03)';
     ctx.lineWidth = 1;
     let offsetX = -(cameraX * 0.3) % 100;
     let offsetY = -(cameraY * 0.3) % 100;
@@ -677,7 +677,7 @@
 
     // Draw Platforms
     platforms.forEach(p => {
-      ctx.fillStyle = p.color;
+      ctx.fillStyle = isLight ? '#cbd5e1' : (p.color || '#334155');
       ctx.beginPath();
       ctx.roundRect(Math.round(p.x), Math.round(p.y), p.width, p.height, 8);
       ctx.fill();
@@ -731,17 +731,20 @@
       ctx.beginPath();
       ctx.arc(bx, by - 10, 24 * pulse, 0, Math.PI*2);
       ctx.fill();
-      // Bulb base
-      ctx.fillStyle = '#d1d5db';
-      ctx.shadowBlur = 0;
-      ctx.fillRect(bx - 10, by + 14, 20, 8);
-      ctx.fillRect(bx - 7,  by + 22, 14, 5);
-      // "Light attracts bugs!" caption
-      ctx.fillStyle = '#fef9c3';
-      ctx.font = 'bold 15px Outfit, sans-serif';
+      // Background circle
+      ctx.fillStyle = isLight ? 'rgba(255,255,255,0.85)' : 'rgba(15,23,42,0.8)';
+      ctx.beginPath();
+      ctx.arc(bx, by - 10, 24 * pulse + 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)';
+      ctx.stroke();
+
+      // Text bubbles
+      ctx.fillStyle = isLight ? '#1e293b' : '#f8fafc';
+      ctx.font = 'bold 14px Outfit, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('💡 Why do programmers prefer dark mode?', bx, by - 50);
-      ctx.fillStyle = '#fde68a';
+      ctx.fillStyle = isLight ? '#64748b' : '#94a3b8';
       ctx.font = '13px Outfit, sans-serif';
       ctx.fillText('Because light attracts bugs! 🐛', bx, by - 30);
     }
@@ -749,18 +752,18 @@
     // Draw Jokes
     jokes.forEach(j => {
       let floatY = Math.sin(Date.now() / 400 + j.x) * 4;
-      ctx.fillStyle = 'rgba(236, 72, 153, 0.1)';
+      ctx.fillStyle = isLight ? 'rgba(236, 72, 153, 0.2)' : 'rgba(236, 72, 153, 0.1)';
       ctx.roundRect(Math.round(j.x - 200), Math.round(j.y + floatY - 40), 400, 70, 8);
       ctx.fill();
-      ctx.strokeStyle = 'rgba(236, 72, 153, 0.4)';
+      ctx.strokeStyle = isLight ? 'rgba(236, 72, 153, 0.6)' : 'rgba(236, 72, 153, 0.4)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      ctx.fillStyle = '#ec4899';
+      ctx.fillStyle = isLight ? '#831843' : '#ec4899';
       ctx.font = 'bold 16px Outfit, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(j.text, Math.round(j.x), Math.round(j.y + floatY - 15));
-      ctx.fillStyle = '#fbcfe8';
+      ctx.fillStyle = isLight ? '#be185d' : '#fbcfe8';
       ctx.font = '14px Outfit, sans-serif';
       ctx.fillText(j.punchline, Math.round(j.x), Math.round(j.y + floatY + 10));
     });
@@ -793,10 +796,11 @@
       ctx.shadowBlur = 0;
 
       // Info box background
-      ctx.fillStyle = 'rgba(10, 15, 30, 0.88)';
+      ctx.fillStyle = isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(10, 15, 30, 0.88)';
+      ctx.beginPath(); // Ensure path is clear
       ctx.roundRect(boxX, boxY, BOX_W, BOX_H, 10);
       ctx.fill();
-      ctx.strokeStyle = 'rgba(168, 85, 247, 0.3)';
+      ctx.strokeStyle = isLight ? 'rgba(0, 0, 0, 0.1)' : 'rgba(168, 85, 247, 0.3)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
@@ -813,11 +817,11 @@
       // Text (offset right of logo if present)
       const textX = hasLogo ? boxX + LOGO_PAD + LOGO_SIZE + 10 : boxX + BOX_W / 2;
       ctx.textAlign = hasLogo ? 'left' : 'center';
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = isLight ? '#1e293b' : '#fff';
       ctx.font = 'bold 15px Outfit, sans-serif';
       ctx.textBaseline = 'alphabetic';
       ctx.fillText(m.text, textX, boxY + 28);
-      ctx.fillStyle = '#94a3b8';
+      ctx.fillStyle = isLight ? '#475569' : '#94a3b8';
       ctx.font = '13px Outfit, sans-serif';
       ctx.fillText(m.subtext, textX, boxY + 48);
     });
