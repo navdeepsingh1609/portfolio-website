@@ -195,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetId === 'view-game') {
           document.getElementById('main-content').classList.add('game-mode');
           document.body.classList.add('game-active');
+          applyTheme('dark-mode');
         } else {
           document.getElementById('main-content').classList.remove('game-mode');
           document.body.classList.remove('game-active');
